@@ -2,5 +2,6 @@
 
   # Simple Word Counter Website
   
-  <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/12895f6b-a5ad-48ec-88fb-a45f286e2f8f" />
+  <img width="1703" height="851" alt="image" src="https://github.com/user-attachments/assets/7482337a-77a9-49e9-b415-130b8dff3c1a" />
+
 </div>
