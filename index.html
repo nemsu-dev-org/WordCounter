@@ -3,47 +3,166 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Word Counter</title>
+    <title>Word Counter - Clean Writing Metrics</title>
+    <meta name="description" content="A focused, fast word and character counter for writers, editors, and students." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="editor.css" />
+    <link rel="stylesheet" href="metrics.css" />
   </head>
   <body>
-    <div class="app-shell">
-      <header class="app-header">
-        <h1 class="app-title">Word Counter</h1>
+    <a href="#text-input" class="skip-link">Skip to text input</a>
+
+    <div class="site-container">
+      <header class="site-header">
+        <div class="brand">
+          <span class="brand-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+              <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+              <path d="M10 9H8"/>
+              <path d="M16 13H8"/>
+              <path d="M16 17H8"/>
+            </svg>
+          </span>
+          <span class="brand-title">Word Counter</span>
+        </div>
+
+        <nav class="header-actions" aria-label="Editor actions">
+          <button type="button" id="paste-btn" class="btn btn-secondary" title="Paste text from clipboard">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/>
+              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+            </svg>
+            <span>Paste</span>
+          </button>
+          <button type="button" id="copy-btn" class="btn btn-secondary" title="Copy text to clipboard">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+            </svg>
+            <span id="copy-text">Copy</span>
+          </button>
+          <button type="button" id="clear-btn" class="btn btn-secondary" title="Clear all text">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+              <path d="M3 3v5h5"/>
+            </svg>
+            <span>Clear</span>
+          </button>
+        </nav>
       </header>
 
-      <main class="app-main" aria-label="Word counter">
-        <section class="card" aria-labelledby="input-label">
-          <div class="card-header">
-            <h2 id="input-label">Your Text</h2>
-            <div class="card-header-actions">
-              <button type="button" id="clear-btn" class="btn btn-ghost">Clear</button>
+      <main class="main-layout">
+        <section class="editor-section" aria-labelledby="editor-heading">
+          <h2 id="editor-heading" class="visually-hidden">Text Editor</h2>
+          <div class="editor-shell">
+            <label for="text-input" class="visually-hidden">Write or paste text</label>
+            <textarea
+              id="text-input"
+              class="editor-input"
+              placeholder="Paste or begin typing your text here..."
+              spellcheck="false"
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="off"
+              data-gramm="false"
+              data-gramm_editor="false"
+              data-enable-grammarly="false"
+              aria-describedby="status-announcement"
+            ></textarea>
+
+            <div class="editor-toolbar">
+              <div class="tool-group" role="group" aria-label="Text transformations">
+                <span class="tool-label">Transform:</span>
+                <button type="button" id="case-upper" class="btn-tool" title="Convert to uppercase">UPPER</button>
+                <button type="button" id="case-lower" class="btn-tool" title="Convert to lowercase">lower</button>
+                <button type="button" id="case-title" class="btn-tool" title="Convert to title case">Title Case</button>
+              </div>
+
+              <div class="goal-group">
+                <label for="goal-input" class="tool-label">Goal (words):</label>
+                <input
+                  type="number"
+                  id="goal-input"
+                  class="goal-input"
+                  min="0"
+                  step="50"
+                  placeholder="Optional"
+                  aria-label="Target word count goal"
+                />
+              </div>
             </div>
           </div>
-          <label class="visually-hidden" for="text-input">Enter or paste text to count words</label>
-          <textarea
-            id="text-input"
-            class="text-input"
-            placeholder="Start typing or paste any paragraph here..."
-            spellcheck="true"
-          ></textarea>
         </section>
 
-        <section class="card card-metrics" aria-label="Word count">
-          <div class="metric">
-            <span class="metric-label">Words</span>
-            <span id="word-count" class="metric-value">0</span>
+        <aside class="sidebar-section" aria-label="Text statistics">
+          <div class="stats-panel">
+            <div class="primary-metrics">
+              <div class="stat-item">
+                <span class="stat-title">Words</span>
+                <span id="word-count" class="stat-num" aria-live="polite">0</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-title">Characters</span>
+                <span id="char-count" class="stat-num" aria-live="polite">0</span>
+              </div>
+            </div>
+
+            <div id="goal-progress-container" class="goal-box" hidden>
+              <div class="goal-header">
+                <span class="goal-status">Goal progress</span>
+                <span id="goal-percent" class="goal-value">0%</span>
+              </div>
+              <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="goal-progressbar">
+                <div id="goal-bar" class="progress-fill"></div>
+              </div>
+            </div>
+
+            <div class="metrics-list">
+              <div class="metric-row">
+                <span class="metric-name">Characters (no spaces)</span>
+                <span id="char-no-spaces-count" class="metric-data">0</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-name">Sentences</span>
+                <span id="sentence-count" class="metric-data">0</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-name">Paragraphs</span>
+                <span id="paragraph-count" class="metric-data">0</span>
+              </div>
+            </div>
+
+            <div class="time-estimates">
+              <div class="time-row">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <span>Reading time:</span>
+                <strong id="reading-time">0 min</strong>
+              </div>
+              <div class="time-row">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                  <line x1="12" x2="12" y1="19" y2="22"/>
+                </svg>
+                <span>Speaking time:</span>
+                <strong id="speaking-time">0 min</strong>
+              </div>
+            </div>
           </div>
-          <div class="metric metric-secondary">
-            <span class="metric-label">Characters</span>
-            <span id="char-count" class="metric-value">0</span>
-          </div>
-        </section>
+        </aside>
       </main>
 
-      <footer class="app-footer">
-        <p class="footer-text">Built with pure HTML, CSS, and JavaScript.</p>
-      </footer>
+      <div id="status-announcement" class="visually-hidden" aria-live="polite"></div>
     </div>
 
     <script src="script.js"></script>

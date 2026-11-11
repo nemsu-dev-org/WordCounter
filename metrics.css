@@ -1,0 +1,146 @@
+.sidebar-section {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Vertical flow: relying on whitespace and hierarchy, NOT borders around every block */
+.stats-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Primary metrics: large numbers without outer card boundaries */
+.primary-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-title {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-muted);
+}
+
+/* Big counter numbers: tabular mono, pure ink, zero decorative glow */
+.stat-num {
+  font-family: var(--font-mono);
+  font-size: 2.25rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--color-ink);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* Word goal: clean inline block */
+.goal-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.goal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.goal-status {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-muted);
+}
+
+.goal-value {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--color-slate);
+}
+
+.progress-track {
+  width: 100%;
+  height: 3px;
+  background-color: var(--color-border);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background-color: var(--color-accent);
+  transition: width var(--transition), background-color var(--transition);
+}
+
+.progress-fill.goal-reached {
+  background-color: var(--color-success);
+}
+
+/* Secondary metrics: simple definition-style list, no outer card box */
+.metrics-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.metric-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.metric-name {
+  font-size: 0.8125rem;
+  color: var(--color-slate);
+}
+
+.metric-data {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Time estimates: subdued metadata, no pill badge frames */
+.time-estimates {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.time-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: var(--color-muted);
+}
+
+.time-row svg {
+  color: var(--color-muted);
+  flex-shrink: 0;
+}
+
+.time-row strong {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-slate);
+  margin-left: auto;
+}

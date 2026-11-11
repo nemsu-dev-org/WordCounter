@@ -1,0 +1,139 @@
+.editor-section {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Editor shell uses bg-contrast for elevation, not an outer border */
+.editor-shell {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* The writing surface itself */
+.editor-input {
+  width: 100%;
+  min-height: 440px;
+  padding: 24px 28px;
+  border: none;
+  outline: none;
+  resize: vertical;
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-ink);
+  background: transparent;
+  /* Fix: browser default blue caret replaced with theme ink color */
+  caret-color: var(--color-ink);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+}
+
+.editor-input::selection {
+  background-color: #2b394f;
+  color: #ffffff;
+}
+
+.editor-input::placeholder {
+  color: var(--color-muted);
+}
+
+/* Focus ring sits inside the shell so the rounded container clips it cleanly */
+.editor-input:focus {
+  outline: none;
+}
+
+.editor-shell:focus-within {
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+
+/* Toolbar: a functional separator, not a decorative panel */
+.editor-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 10px 16px;
+  border-top: 1px solid var(--color-border-subtle);
+  background-color: var(--color-surface-muted);
+}
+
+.tool-group,
+.goal-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Labels: sentence case, subdued, not uppercase eyebrows */
+.tool-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-muted);
+}
+
+/* Case-transform buttons: use mono so the case preview is literal */
+.btn-tool {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background-color: transparent;
+  color: var(--color-slate);
+  cursor: pointer;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.btn-tool:hover {
+  background-color: var(--color-border);
+  color: var(--color-ink);
+}
+
+.btn-tool:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn-tool:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Word goal input: form element, keeps its border functionally */
+.goal-input {
+  width: 88px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background-color: transparent;
+  color: var(--color-ink);
+  caret-color: var(--color-ink);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+}
+
+.editor-input::selection {
+  background-color: #2b394f;
+  color: #ffffff;
+}
+
+.goal-input:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+@media (min-width: 1024px) {
+  .editor-input {
+    min-height: 540px;
+  }
+}
